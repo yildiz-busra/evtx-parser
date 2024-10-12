@@ -20,21 +20,21 @@ def read_evtx(file_path):
                         for item in data_items:
                             key = item.get('@Name', 'Unknown')
                             value = item.get('#text', None)
-                            if value:  # Only include non-empty values
+                            if value:
                                 essential_data[key] = value
                     else:
                         key = data_items.get('@Name', 'Unknown')
                         value = data_items.get('#text', None)
-                        if value:  # Only include non-empty values
+                        if value:
                             essential_data[key] = value
 
-                # Prepare the output string
+                # Output string
                 event_data_str = "; ".join([f"{k}: {v}" for k, v in essential_data.items()])
                 
                 f.write(f"Event ID: {event_id}, Time: {event_time}\n")
                 if event_data_str:
                     f.write(f"  Data: {event_data_str}\n")
-                f.write("\n")  # Blank line for separating events
+                f.write("\n")  
 
 file_path = '/path'
 read_evtx(file_path)
